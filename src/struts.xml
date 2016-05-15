@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 最終変更：佐久間 -->
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- property以下のlogin_**.properyファイルを指定している -->
+	<constant name="struts.custom.i18n.resources"
+		value="
+	com.internousdev.gekidanroadshow.property.question,
+	com.internousdev.gekidanroadshow.property.admin_sales,
+	com.internousdev.gekidanroadshow.property.admin_header,
+	com.internousdev.gekidanroadshow.property.header,
+	com.internousdev.gekidanroadshow.property.footer,
+	com.internousdev.gekidanroadshow.property.posting_form,
+	com.internousdev.gekidanroadshow.property.posting_confirmation,
+	com.internousdev.gekidanroadshow.property.posting_complete,
+	com.internousdev.gekidanroadshow.property.login,
+	com.internousdev.gekidanroadshow.property.admin_header,
+	com.internousdev.gekidanroadshow.property.admin_login,
+	com.internousdev.gekidanroadshow.property.admin_user,
+	com.internousdev.gekidanroadshow.property.main_page,
+	com.internousdev.gekidanroadshow.property.agreement,
+	com.internousdev.gekidanroadshow.property.sign_up,
+	com.internousdev.gekidanroadshow.property.leave_confirm,
+	com.internousdev.gekidanroadshow.property.leave_complete,
+	com.internousdev.gekidanroadshow.property.ticket_buy,
+	com.internousdev.gekidanroadshow.property.admin_post,
+	com.internousdev.gekidanroadshow.property.ticket_buy_complete,
+	com.internousdev.gekidanroadshow.property.my_page,
+	com.internousdev.gekidanroadshow.property.user_info_complete,
+	com.internousdev.gekidanroadshow.property.ticket_buy_confirm,
+	com.internousdev.gekidanroadshow.property.company_profile,
+	com.internousdev.gekidanroadshow.property.error,
+	com.internousdev.gekidanroadshow.property.user_info_change" />
+
+	<package name="gekidanroadshow" namespace="/" extends="struts-default">
+		<!-- ここにアクションを追加していく -->
+
+		<!--利用規約画面へ遷移 -->
+		<action name="GoAgreementAction"
+			class="com.internousdev.gekidanroadshow.action.GoAgreementAction"
+			method="execute">
+			<result name="success">agreement.jsp</result>
+		</action>
+
+		<!--退会確認画面へ遷移 -->
+		<action name="GoLeaveConfirmAction"
+			class="com.internousdev.gekidanroadshow.action.GoLeaveConfirmAction"
+			method="execute">
+			<result name="success">leave_confirm.jsp</result>
+			<result name="loginError">login.jsp</result>
+		</action>
+
+		<!--退会完了画面へ遷移 -->
+		<action name="GoLeaveCompleteAction"
+			class="com.internousdev.gekidanroadshow.action.GoLeaveCompleteAction"
+			method="execute">
+			<result name="success">leave_complete.jsp</result>
+			<result name="error">error.jsp</result>
+			<result name="loginError">login.jsp</result>
+		</action>
+
+		<!-- Facebook認証を行うアクション -->
+		<action name="login-facebook"
+			class="com.internousdev.gekidanroadshow.action.GoFacebookAction"
+			method="execute">
+			<result name="success">login.jsp</result>
+			<result name="error">login.jsp</result>
+		</action>
+
+		<!-- Facebook認証のコールバックアクション -->
+		<action name="LoginFacebookAction"
+			class="com.internousdev.gekidanroadshow.action.LoginFacebookAction"
+			method="execute">
+			<result name="success">index.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+
+		<!--メインページ画面へ遷移 -->
+		<action name="GoMainAction"
+			class="com.internousdev.gekidanroadshow.action.GoMainAction" method="execute">
+			<result name="success">main_page.jsp</result>
+			<result name="error">login.jsp</result>
+			<result name="input">login.jsp</result>
+		</action>
+
+		<!-- ここから松浦 -->
+		<!--メインページ画面へ遷移(validationの無効) -->
+		<action name="SkipValidationMainAction"
+			class="com.internousdev.gekidanroadshow.action.SkipValidationAction" method="execute">
+			<result name="success">main_page.jsp</result>
+			<result name="input">error.jsp</result>
+		</action>
+		<!-- ここまで松浦 -->
+
+		<!-- ユーザーログイン画面へ遷移 -->
+		<action name="GoUserLoginAction"
+			class="com.internousdev.gekidanroadshow.action.GoUserLoginAction"
+			method="execute">
+			<result name="success">login.jsp</result>
+			<result name="loginError">login.jsp</result>
+		</action>
+
+		<!-- 売り上げ管理画面へ遷移 -->
+		<action name="GoAdminSalesAction"
+			class="com.internousdev.gekidanroadshow.action.GoAdminSalesAction"
+			method="execute">
+			<result name="success">admin_sales.jsp</result>
+			<result name="error">admin_sales.jsp</result>
+			<result name="loginError">admin_login.jsp</result>
+		</action>
+
+		<!-- Twitter認証を行うアクション -->
+		<action name="login-twitter"
+			class="com.internousdev.gekidanroadshow.action.GoTwitterAction"
+			method="execute">
+			<result name="success">login.jsp</result>
+			<result name="error">login.jsp</result>
+		</action>
+
+		<!-- Twitter認証のコールバックアクション-->
+		<action name="LoginTwitterAction"
+			class="com.internousdev.gekidanroadshow.action.LoginTwitterAction"
+			method="execute">
+			<result name="success">main_page.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+
+		<!--よくある質問画面へ遷移 -->
+		<action name="GoQuestionAction"
+			class="com.internousdev.gekidanroadshow.action.GoQuestionAction"
+			method="execute">
+			<result name="success">question.jsp</result>
+		</action>
+
+		<!-- 会社概要画面へ遷移 -->
+		<action name="GoCompanyProfileAction"
+			class="com.internousdev.gekidanroadshow.action.GoCompanyProfileAction"
+			method="execute">
+			<result name="success">company_profile.jsp</result>
+		</action>
+
+		<!-- ここまで仁田作成 -->
+		<!-- 管理者：ユーザー管理画面へ遷移 -->
+		<action name="GoAdminUserAction"
+			class="com.internousdev.gekidanroadshow.action.GoAdminUserAction"
+			method="execute">
+			<result name="success">admin_user.jsp</result>
+			<result name="error">admin_login.jsp</result>
+			<result name="input">admin_login.jsp</result>
+		</action>
+
+		<!-- ここから松浦作成 -->
+		<!-- 管理者：ユーザー管理画面へ遷移(skipvalidation) -->
+		<action name="SkipValidationAdminAction"
+			class="com.internousdev.gekidanroadshow.action.SkipValidationAdminAction"
+			method="execute">
+			<result name="success">admin_user.jsp</result>
+		</action>
+
+		<!-- 管理者：ユーザー管理画面でユーザー情報を返す -->
+		<action name="UserSearchAction"
+			class="com.internousdev.gekidanroadshow.action.UserSearchAction"
+			method="execute">
+			<result name="success">admin_user.jsp</result>
+			<result name="error">admin_user.jsp</result>
+		</action>
+
+		<!-- ここから加藤作成 -->
+		<!--購入画面へ遷移 -->
+		<action name="GoTicketBuyAction"
+			class="com.internousdev.gekidanroadshow.action.GoTicketBuyAction"
+			method="execute">
+			<result name="success">ticket_buy.jsp</result>
+			<result name="error">user_info_change.jsp</result>
+			<result name="loginError">login.jsp</result>
+		</action>
+
+		<!--購入確認画面へ遷移 -->
+		<action name="GoTicketBuyComfirmAction"
+			class="com.internousdev.gekidanroadshow.action.GoTicketBuyComfirmAction"
+			method="execute">
+			<result name="success">ticket_buy_confirm.jsp</result>
+			<result name="error">ticket_buy.jsp</result>
+			<result name="loginError">login.jsp</result>
+		</action>
+
+		<!--購入完了画面へ遷移 -->
+		<action name="GoTicketBuyCompleteAction"
+			class="com.internousdev.gekidanroadshow.action.GoTicketBuyCompleteAction"
+			method="execute">
+			<result name="success">ticket_buy_complete.jsp</result>
+			<result name="error">ticket_buy_confirm.jsp</result>
+			<result name="loginError">login.jsp</result>
+		</action>
+		<!-- ここまで加藤作成 -->
+
+		<!-- ここから佐久間作成 -->
+		<!-- 登録内容変更画面へ遷移 -->
+		<action name="GoUserInfoChangeAction"
+			class="com.internousdev.gekidanroadshow.action.GoUserInfoChangeAction"
+			method="execute">
+			<result name="success">user_info_change.jsp</result>
+			<result name="error">user_info_change.jsp</result>
+			<result name="loginError">login.jsp</result>
+		</action>
+
+		<!-- 登録内容変更確認画面へ遷移 -->
+		<action name="GoUserInfoConfirmAction"
+			class="com.internousdev.gekidanroadshow.action.GoUserInfoConfirmAction"
+			method="execute">
+			<result name="success">user_info_confirm.jsp</result>
+			<result name="input">user_info_change.jsp</result>
+			<result name="loginError">login.jsp</result>
+		</action>
+
+		<!-- 登録内容変更完了画面へ遷移するアクション -->
+		<action name="GoUserInfoCompleteAction"
+			class="com.internousdev.gekidanroadshow.action.GoUserInfoCompleteAction"
+			method="execute">
+			<result name="success">user_info_complete.jsp</result>
+			<result name="error">user_info_change.jsp</result>
+			<result name="loginError">login.jsp</result>
+		</action>
+		<!-- ここまで佐久間作成 -->
+
+		<!--ここから金澤作成 -->
+		<!--管理者：問い合わせ画面へ遷移 -->
+		<action name="GoAdminPostAction"
+			class="com.internousdev.gekidanroadshow.action.GoAdminPostAction"
+			method="execute">
+			<result name="success">admin_post.jsp</result>
+			<result name="error">admin_post.jsp</result>
+			<result name="loginError">admin_login.jsp</result>
+		</action>
+		<!--ここまで金澤作成 -->
+
+		<!-- ここから松浦作成 -->
+		<!--問い合わせ画面へ遷移 -->
+		<action name="GoPostingFormAction"
+			class="com.internousdev.gekidanroadshow.action.GoPostingFormAction"
+			method="execute">
+			<result name="success">posting_form.jsp</result>
+		</action>
+
+
+		<!--問い合わせ確認画面へ遷移 -->
+		<action name="GoPostingConfirmAction"
+			class="com.internousdev.gekidanroadshow.action.GoPostingConfirmAction"
+			method="execute">
+			<result name="success">posting_confirmation.jsp</result>
+			<result name="input">posting_form.jsp</result>
+		</action>
+
+		<!--問い合わせ完了画面へ遷移 -->
+		<action name="GoPostingCompleteAction"
+			class="com.internousdev.gekidanroadshow.action.GoPostingCompleteAction"
+			method="execute">
+			<result name="success">posting_complete.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+		<!-- ここまで松浦作成 -->
+
+		<!-- Google認証を行うアクション -->
+		<action name="login-google"
+			class="com.internousdev.gekidanroadshow.action.GoGoogleAction"
+			method="execute">
+			<result name="success">login.jsp</result>
+			<result name="error">login.jsp</result>
+		</action>
+
+		<!-- Google認証のコールバックアクション -->
+		<action name="LoginGoogleAction"
+			class="com.internousdev.gekidanroadshow.action.LoginGoogleAction"
+			method="execute">
+			<result name="success">main_page.jsp</result>
+			<result name="error">main_page.jsp</result>
+		</action>
+
+		<!-- ここから松浦作成 -->
+		<!-- マイページ画面へ遷移 -->
+		<action name="GoMyPageAction"
+			class="com.internousdev.gekidanroadshow.action.GoMyPageAction"
+			method="execute">
+			<result name="success">my_page.jsp</result>
+			<result name="error">error.jsp</result>
+			<result name="loginError">login.jsp</result>
+		</action>
+
+		<!-- 管理者ログイン画面へ遷移 -->
+		<action name="GoAdminLoginAction"
+			class="com.internousdev.gekidanroadshow.action.GoAdminLoginAction"
+			method="execute">
+			<result name="success">admin_login.jsp</result>
+		</action>
+		<!-- ここまで松浦作成 -->
+
+		<!-- 新規登録画面へ遷移 -->
+		<action name="GoSignUpAction"
+			class="com.internousdev.gekidanroadshow.action.GoSignUpAction"
+			method="execute">
+			<result name="success">sign_up.jsp</result>
+		</action>
+
+		<!-- 新規登録内容確認画面へ遷移 -->
+		<action name="GoSignUpConfirmAction"
+			class="com.internousdev.gekidanroadshow.action.GoSignUpConfirmAction"
+			method="execute">
+			<result name="success">sign_up_confirm.jsp</result>
+			<result name="error">sign_up.jsp</result>
+			<result name="input">sign_up.jsp</result>
+		</action>
+
+		<!-- 新規登録完了画面へ遷移 -->
+		<action name="GoSignUpCompleteAction"
+			class="com.internousdev.gekidanroadshow.action.GoSignUpCompleteAction"
+			method="execute">
+			<result name="success">sign_up_complete.jsp</result>
+			<result name="error">sign_up_confirm.jsp</result>
+		</action>
+
+		<!-- メイン画面の更新時にメイン画面へ遷移 -->
+		<action name="FacebookGoMainAction"
+			class="com.internousdev.gekidanroadshow.action.FacebookGoMainAction"
+			method="execute">
+			<result name="success">main_page.jsp</result>
+		</action>
+
+		<!--非ログイン時にログイン画面以降をログイン画面に強制的へ遷移する -->
+		<action name="MustGoLoginAction"
+			class="com.internousdev.gekidanroadshow.action.MustGoLoginAction"
+			method="execute">
+			<result name="success">login.jsp</result>
+		</action>
+	</package>
+</struts>
+
